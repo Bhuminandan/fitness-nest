@@ -28,9 +28,11 @@ import { ShardModule } from './shard/shard.module';
       useFactory: async (
         configService: ConfigService,
       ): Promise<DataSourceOptions> => {
-        const shard1Config = configService.get<DataSourceOptions>(
-          ShardNames.SHARD1,
-        );
+        const typeormConfig = configService.get<DataSourceOptions>('typeorm');
+        if (!typeormConfig) {
+          throw new Error('TypeORM configuration not found');
+        }
+        const shard1Config = typeormConfig[ShardNames.SHARD1];
         console.log('Shard 1 Config:', shard1Config);
         return shard1Config!;
       },
@@ -44,10 +46,11 @@ import { ShardModule } from './shard/shard.module';
       useFactory: async (
         configService: ConfigService,
       ): Promise<DataSourceOptions> => {
-        const shard2Config = configService.get<DataSourceOptions>(
-          ShardNames.SHARD2,
-        );
-        console.log('Config:', configService.get('typeorm'));
+        const typeormConfig = configService.get<DataSourceOptions>('typeorm');
+        if (!typeormConfig) {
+          throw new Error('TypeORM configuration not found');
+        }
+        const shard2Config = typeormConfig[ShardNames.SHARD2];
         console.log('Shard 2 Config:', shard2Config);
         return shard2Config!;
       },

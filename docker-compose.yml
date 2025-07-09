@@ -1,0 +1,32 @@
+version: '3.8'
+
+# Spinup two postresql and forward ports to 5433 and 5434
+
+services:
+  db1:
+    image: postgres:latest
+    container_name: db1
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Bhumi123
+      POSTGRES_DB: fitness
+    ports:
+      - "5433:5432"
+    volumes:
+      - db1_data:/var/lib/postgresql/data
+
+  db2:
+    image: postgres:latest
+    container_name: db2
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Bhumi123
+      POSTGRES_DB: fitness
+    ports:
+      - "5434:5432"
+    volumes:
+      - db2_data:/var/lib/postgresql/data
+
+volumes:
+  db1_data:
+  db2_data:
