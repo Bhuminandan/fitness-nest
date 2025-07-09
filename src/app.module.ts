@@ -33,7 +33,6 @@ import { ShardModule } from './shard/shard.module';
           throw new Error('TypeORM configuration not found');
         }
         const shard1Config = typeormConfig[ShardNames.SHARD1];
-        console.log('Shard 1 Config:', shard1Config);
         return shard1Config!;
       },
     }),
@@ -51,7 +50,6 @@ import { ShardModule } from './shard/shard.module';
           throw new Error('TypeORM configuration not found');
         }
         const shard2Config = typeormConfig[ShardNames.SHARD2];
-        console.log('Shard 2 Config:', shard2Config);
         return shard2Config!;
       },
     }),
